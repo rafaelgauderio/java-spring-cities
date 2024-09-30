@@ -9,6 +9,8 @@ public class CrudCitiesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CrudCitiesApplication.class, args);
 		//mvn spring-boot:run 
+		//mvn package
+		//mvn clean install
 	}
 
 }

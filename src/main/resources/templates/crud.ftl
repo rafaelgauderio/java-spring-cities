@@ -6,6 +6,7 @@
     <title>CRUD of Cities</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen">
     <script src='main.js'></script>
 </head>
 <body>
@@ -44,9 +45,11 @@
                             </td>
                         </tr>
                     </#list> 
-                    </tbody>  
+                    </tbody>                   
                 </table>
-    </div>
-    
+                <div class="d-flex justify-content-center aling-items-center text-white bg-dark rounded">
+                    <div class="text-center mt-2 mb-2 font-italic">Developed by Rafael de Luca</div>
+                </div> 
+    </div>    
 </body>
 </html>

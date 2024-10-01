@@ -15,14 +15,14 @@
                     <h1>Cities Manager</h1>
                     <p>A solution to CREATE, REVIEW, UPDATE and DELETE cities</p>
                 </div>
-                <form>
+                <form action="/create" method="POST">
                     <div class="form-group">
                         <label for="name">City:</label>
-                        <input type="text" class="form-control" placeholder="Enter the city name" id="name">
+                        <input  name="name" type="text" class="form-control" placeholder="Enter the city name" id="name">
                     </div>
                     <div class="form-group">
                         <label for="state">State:</label>
-                        <input type="text" class="form-control" placeholder="Enter the state name the the name belongs" id="state">
+                        <input name="state" type="text" class="form-control" placeholder="Enter the state name the the name belongs" id="state">
                     </div>
                     <button type="submit" class="btn btn-primary">CREATE CITY</button>
                 </form>

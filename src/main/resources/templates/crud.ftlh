@@ -25,32 +25,26 @@
                     </div>
                     <button type="submit" class="btn btn-primary">CREATE CITY</button>
                 </form>
-                <table class="table table-striped table-houver mt-5">
-                    <thead class="thead-light">
+                <table class="table table-striped table-hover mt-5">
+                    <thead class="thead-dark">
                         <tr>
                             <th>Name</th>
                             <th>State</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody
+                    <#list listOfCities as city>
                         <tr>
-                            <td>Porto Alegre</td>
-                            <td>Rio Grande do Sul</td>
+                            <td>${city.name}</td>
+                            <td>${city.state}</td>
                             <td class="d-flex d-justify-content-center">
                                 <a class="btn btn-warning mr-4">UPDATE</a>
                                 <a class="btn btn-danger">DELETE</a>
                             </td>
                         </tr>
-                        <tr></tr>
-                            <td>Salvador</td>
-                            <td>Bahia</td>
-                            <td class="d-flex d-justify-content-center">
-                                <a class="btn btn-warning mr-4">UPDATE</a>
-                                <a class="btn btn-danger">DELETE</a>
-                            </td>
-                        </tr>
-                    </tbody>
+                    </#list> 
+                    </tbody>  
                 </table>
     </div>
     

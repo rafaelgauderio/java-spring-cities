@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CityController {
@@ -40,6 +41,18 @@ public class CityController {
         cities.add(city);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/delete")
+    public String deleteCity(
+        @RequestParam String name,
+        @RequestParam String state
+    ) {
+        cities.removeIf( city -> 
+            city.getName().equals(name) &&
+            city.getState().equals(state));
+         
+         return "redirect:/";
     }
 
 }

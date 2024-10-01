@@ -41,15 +41,15 @@
                             <td>${city.state}</td>
                             <td class="d-flex d-justify-content-center">
                                 <a class="btn btn-warning mr-4">UPDATE</a>
-                                <a class="btn btn-danger">DELETE</a>
+                                <a class="btn btn-danger" href="/delete?name=${city.name}&state=${city.state}">DELETE</a>
                             </td>
                         </tr>
                     </#list> 
                     </tbody>                   
-                </table>
-                <div class="d-flex justify-content-center aling-items-center text-white bg-dark rounded">
-                    <div class="text-center mt-2 mb-2 font-italic">Developed by Rafael de Luca</div>
-                </div> 
-    </div>    
+                </table>                
+    </div>
+    <div class="d-flex justify-content-center aling-items-center text-white bg-dark">
+        <div class="text-center mt-2 mb-2 font-italic">Developed by Rafael de Luca</div>
+    </div>     
 </body>
 </html>

@@ -42,6 +42,14 @@
                                 <a class="btn btn-danger">DELETE</a>
                             </td>
                         </tr>
+                        <tr></tr>
+                            <td>Salvador</td>
+                            <td>Bahia</td>
+                            <td class="d-flex d-justify-content-center">
+                                <a class="btn btn-warning mr-4">UPDATE</a>
+                                <a class="btn btn-danger">DELETE</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
     </div>

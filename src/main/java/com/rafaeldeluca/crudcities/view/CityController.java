@@ -37,7 +37,7 @@ public class CityController {
     }
 
     @PostMapping("/create")
-    public String create(City city) {
+    public String create(City city) {        
         cities.add(city);
 
         return "redirect:/";

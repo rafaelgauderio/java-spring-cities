@@ -24,7 +24,9 @@
                 </#if>                     
                         <div class="form-group">
                             <label for="name">City:</label>
-                            <input  
+                            <input
+                                required  
+                                maxlength=50
                                 value="${(updateCity.name)!}"
                                 name="name" 
                                 type="text"
@@ -34,7 +36,9 @@
                         </div>
                         <div class="form-group">
                             <label for="state">State:</label>
-                            <input 
+                            <input
+                                required 
+                                maxlength=2
                                 value="${(updateCity.state)!}"
                                 name="state"
                                 type="text"
@@ -50,7 +54,7 @@
                         </#if>
                     </form>
                     <table class="table table-striped table-hover mt-5">
-                        <thead class="thead-dark">
+                        <thead class="thead-success">
                             <tr>
                                 <th>Name</th>
                                 <th>State</th>
@@ -61,7 +65,7 @@
                         <#list listOfCities as city>
                             <tr>
                                 <td>${city.name}</td>
-                                <td>${city.state}</td>
+                                <td style="text-transform:uppercase">${city.state}</td>
                                 <td class="d-flex d-justify-content-center">
                                     <a class="btn btn-warning mr-4" href="/preparingUpdate?name=${city.name}&state=${city.state}">UPDATE</a>
                                     <a class="btn btn-danger" href="/delete?name=${city.name}&state=${city.state}">DELETE</a>

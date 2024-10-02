@@ -5,9 +5,12 @@ import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class CityController {
@@ -37,8 +40,20 @@ public class CityController {
     }
 
     @PostMapping("/create")
-    public String create(City city) {        
-        cities.add(city);
+    public String create(@Valid City city, BindingResult validation) { 
+
+        if(validation.hasErrors()==true) {
+            validation  
+                .getFieldErrors()
+                .forEach( erro -> 
+                System.out.println(
+                    String.format("The atribute %s send the message: %s",
+                    erro.getField(),
+                    erro.getDefaultMessage())
+                ));
+        } else {
+            cities.add(city);
+        }       
 
         return "redirect:/";
     }
@@ -75,13 +90,18 @@ public class CityController {
     }
 
     @PostMapping("/update")
-    public String update (
+    public String update (@Valid
         @RequestParam String updateName,
         @RequestParam String updateState,        
-        City city) {
-        cities.removeIf( updateCity -> updateCity.getName().equals(updateName) &&
+        City city,
+        BindingResult validation
+            ) {
+
+        cities.removeIf(updateCity -> updateCity.getName().equals(updateName) &&
                                        updateCity.getState().equals(updateState));
-                      create(city); 
+              
+            create(city,validation);
+                             
         
         return "redirect:/";
     }

@@ -54,7 +54,7 @@
                         </#if>
                     </form>
                     <table class="table table-striped table-hover mt-5">
-                        <thead class="thead-success">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>Name</th>
                                 <th>State</th>

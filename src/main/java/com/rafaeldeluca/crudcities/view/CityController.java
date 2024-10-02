@@ -55,4 +55,35 @@ public class CityController {
          return "redirect:/";
     }
 
+    @GetMapping("/preparingUpdate")
+    public String preparingUpdate (
+        @RequestParam String name,
+        @RequestParam String state,
+        Model memory
+    )   {
+       var updateCity = cities
+            .stream()
+            .filter(
+                city -> city.getName().equals(name) &&
+                        city.getState().equals(state))
+            .findAny(); 
+        if(updateCity.isPresent()) {
+            memory.addAttribute("updateCity",updateCity.get());
+            memory.addAttribute("listOfCities", cities);
+        }
+        return "/crud";
+    }
+
+    @PostMapping("/update")
+    public String update (
+        @RequestParam String updateName,
+        @RequestParam String updateState,        
+        City city) {
+        cities.removeIf( updateCity -> updateCity.getName().equals(updateName) &&
+                                       updateCity.getState().equals(updateState));
+                      create(city); 
+        
+        return "redirect:/";
+    }
+
 }

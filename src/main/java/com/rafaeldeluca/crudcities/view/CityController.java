@@ -100,7 +100,7 @@ public class CityController {
         BindingResult validation,
         Model memory) {
 
-         if(validation.hasErrors()==true) {
+        if (validation.hasErrors()==true) {
             validation 
                 .getFieldErrors()                 
                 .forEach( error ->                
@@ -110,14 +110,14 @@ public class CityController {
             memory.addAttribute("providedName",city.getName());
             memory.addAttribute("providedState", city.getState());
             memory.addAttribute("listOfCities",cities);   
-            return "/crud";         
-        } else {
+        }           
+       
              cities.removeIf(updateCity -> 
                                 updateCity.getName().equalsIgnoreCase(updateName) &&
                                 updateCity.getState().equalsIgnoreCase(updateState));
             create(city, validation, memory);
             return "redirect:/";
         }    
-    }
+    
 
 }

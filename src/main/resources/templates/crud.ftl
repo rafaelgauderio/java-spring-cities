@@ -25,7 +25,8 @@
                         <div class="form-group">
                             <label for="name">City:</label>
                             <input
-                                required  
+                                required
+                                minlength=3  
                                 maxlength=50
                                 value="${(updateCity.name)!}"
                                 name="name" 
@@ -37,7 +38,8 @@
                         <div class="form-group">
                             <label for="state">State:</label>
                             <input
-                                required 
+                                required
+                                minlength=2 
                                 maxlength=2
                                 value="${(updateCity.state)!}"
                                 name="state"

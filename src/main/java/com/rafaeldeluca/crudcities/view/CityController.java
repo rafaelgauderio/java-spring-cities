@@ -75,8 +75,10 @@ public class CityController {
     @GetMapping("/preparingUpdate")
     public String preparingUpdate (
         @RequestParam String name,
-        @RequestParam String state,
+        @RequestParam String state,       
         Model memory)   {
+
+            
        var updateCity = cities
             .stream()
             .filter(
@@ -91,20 +93,31 @@ public class CityController {
     }
 
     @PostMapping("/update")
-    public String update (
+    public String update (@Valid
         @RequestParam String updateName,
         @RequestParam String updateState,        
-        City city,
+        @Valid City city,
         BindingResult validation,
-        Model memory) {    
-       
+        Model memory) {
+
+         if(validation.hasErrors()==true) {
+            validation 
+                .getFieldErrors()                 
+                .forEach( error ->                
+                    memory.addAttribute(error.getField(),
+                    error.getDefaultMessage())
+                 );
+            memory.addAttribute("providedName",city.getName());
+            memory.addAttribute("providedState", city.getState());
+            memory.addAttribute("listOfCities",cities);   
+            return "/crud";         
+        } else {
              cities.removeIf(updateCity -> 
                                 updateCity.getName().equalsIgnoreCase(updateName) &&
-                                updateCity.getState().equalsIgnoreCase(updateState));              
-            
-        create(city,validation,memory);
-             
-        return "redirect:/";
+                                updateCity.getState().equalsIgnoreCase(updateState));
+            create(city, validation, memory);
+            return "redirect:/";
+        }    
     }
 
 }

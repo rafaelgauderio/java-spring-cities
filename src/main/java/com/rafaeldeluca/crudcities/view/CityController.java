@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 @Controller
 public class CityController {
 
-    private final Set<City> cities;
+    private Set<City> cities;
 
     // constructor
     public CityController() {
@@ -43,15 +43,12 @@ public class CityController {
     public String create(@Valid City city, BindingResult validation, Model memory) { 
 
         if(validation.hasErrors()==true) {
-            validation  
-                .getFieldErrors()
-                .forEach( erro -> 
-                System.out.println(
-                    String.format("The atribute %s send the message: %s",
-                    memory.addAttribute(erro.getField(), erro.getDefaultMessage()),
-                    erro.getField(),
-                    erro.getDefaultMessage())
-                ));
+            validation 
+                .getFieldErrors()                 
+                .forEach( error ->                
+                    memory.addAttribute(error.getField(),
+                    error.getDefaultMessage())
+                 );
             memory.addAttribute("providedName",city.getName());
             memory.addAttribute("providedState", city.getState());
             memory.addAttribute("listOfCities",cities);
@@ -79,8 +76,7 @@ public class CityController {
     public String preparingUpdate (
         @RequestParam String name,
         @RequestParam String state,
-        Model memory
-    )   {
+        Model memory)   {
        var updateCity = cities
             .stream()
             .filter(
@@ -89,23 +85,25 @@ public class CityController {
             .findAny(); 
         if(updateCity.isPresent()) {
             memory.addAttribute("updateCity",updateCity.get());
-            memory.addAttribute("listOfCities", cities);
+            memory.addAttribute("listOfCities",cities);
         }
         return "/crud";
     }
 
     @PostMapping("/update")
-    public String update (@Valid
+    public String update (
         @RequestParam String updateName,
         @RequestParam String updateState,        
         City city,
         BindingResult validation,
-        Model memory
-            ) {    
+        Model memory) {    
        
-             cities.removeIf(updateCity -> updateCity.getName().equalsIgnoreCase(updateName) &&
-                                       updateCity.getState().equalsIgnoreCase(updateState));              
-            create(city,validation, memory);
+             cities.removeIf(updateCity -> 
+                                updateCity.getName().equalsIgnoreCase(updateName) &&
+                                updateCity.getState().equalsIgnoreCase(updateState));              
+            
+        create(city,validation,memory);
+             
         return "redirect:/";
     }
 

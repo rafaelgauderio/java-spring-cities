@@ -16,11 +16,11 @@
                     <p>A solution to CREATE, REVIEW, UPDATE and DELETE cities</p>
                 </div>
                 <#if updateCity??>
-                    <form action="/update" method="POST" class="needs-validation" novalidation>
+                    <form action="/update" method="POST" class="needs-validation" novalidate>
                         <input type="hidden" name="updateName" value="${(updateCity.name)!}"/>
                         <input type="hidden" name="updateState" value="${(updateCity.state)!}"/>
                 <#else>
-                    <form action="/create" method="POST" class="needs-validation" novalidation>
+                    <form action="/create" method="POST" class="needs-validation" novalidate>
                 </#if>                     
                         <div class="form-group">
                             <label for="name">City:</label>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <#if updateCity??>
-                            <button type="submit" class="btn btn-primary">FINISH UPDATE CITY</button>
+                            <button type="submit" class="btn btn-success">FINISH UPDATE CITY</button>
                         <#else>
                             <button type="submit" class="btn btn-primary">CREATE CITY</button>
                         </#if>

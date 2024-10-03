@@ -93,13 +93,13 @@ public class CityController {
     public String update (@Valid
         @RequestParam String updateName,
         @RequestParam String updateState,        
-        City cityUpdated,
+        City city,
         BindingResult validation
             ) {    
        
              cities.removeIf(updateCity -> updateCity.getName().equals(updateName) &&
                                        updateCity.getState().equals(updateState));              
-            create(cityUpdated,validation);
+            create(city,validation);
         return "redirect:/";
     }
 

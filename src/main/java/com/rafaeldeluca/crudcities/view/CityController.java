@@ -93,31 +93,34 @@ public class CityController {
     }
 
     @PostMapping("/update")
-    public String update (@Valid
+    public String update (
         @RequestParam String updateName,
         @RequestParam String updateState,        
         @Valid City city,
         BindingResult validation,
         Model memory) {
 
-        if (validation.hasErrors()==true) {
+        if  (validation.hasErrors()==true) {
             validation 
                 .getFieldErrors()                 
-                .forEach( error ->                
-                    memory.addAttribute(error.getField(),
-                    error.getDefaultMessage())
-                 );
-            memory.addAttribute("providedName",city.getName());
-            memory.addAttribute("providedState", city.getState());
-            memory.addAttribute("listOfCities",cities);   
-        }           
-       
-             cities.removeIf(updateCity -> 
+                .forEach(error ->
+                            System.out.println(
+                            String.format("The atribute  %s send the message: %s", 
+                                error.getField(),
+                                error.getDefaultMessage())                   
+                            ));
+                            memory.addAttribute("providedName", city.getName());
+                            memory.addAttribute("providedState",city.getState());
+                            memory.addAttribute("listOfCities",cities);
+                            return "/crud";          
+        } else {
+            cities.removeIf(updateCity -> 
                                 updateCity.getName().equalsIgnoreCase(updateName) &&
                                 updateCity.getState().equalsIgnoreCase(updateState));
-            create(city, validation, memory);
-            return "redirect:/";
-        }    
-    
+            cities.add(city);            
+        }   
+        return "redirect:/";
+        
+    }  
 
 }

@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 @Controller
 public class CityController {
 
-    private Set<City> cities;
+    private final Set<City> cities;
 
     // constructor
     public CityController() {
@@ -40,7 +40,7 @@ public class CityController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid City city, BindingResult validation) { 
+    public String create(@Valid City city, BindingResult validation, Model memory) { 
 
         if(validation.hasErrors()==true) {
             validation  
@@ -48,9 +48,14 @@ public class CityController {
                 .forEach( erro -> 
                 System.out.println(
                     String.format("The atribute %s send the message: %s",
+                    memory.addAttribute(erro.getField(), erro.getDefaultMessage()),
                     erro.getField(),
                     erro.getDefaultMessage())
                 ));
+            memory.addAttribute("providedName",city.getName());
+            memory.addAttribute("providedState", city.getState());
+            memory.addAttribute("listOfCities",cities);
+            return ("/crud");
         } else {
             cities.add(city);
         }       
@@ -64,8 +69,8 @@ public class CityController {
         @RequestParam String state
     ) {
         cities.removeIf( city -> 
-            city.getName().equals(name) &&
-            city.getState().equals(state));
+            city.getName().equalsIgnoreCase(name) &&
+            city.getState().equalsIgnoreCase(state));
          
          return "redirect:/";
     }
@@ -79,8 +84,8 @@ public class CityController {
        var updateCity = cities
             .stream()
             .filter(
-                city -> city.getName().equals(name) &&
-                        city.getState().equals(state))
+                city -> city.getName().equalsIgnoreCase(name) &&
+                        city.getState().equalsIgnoreCase(state))
             .findAny(); 
         if(updateCity.isPresent()) {
             memory.addAttribute("updateCity",updateCity.get());
@@ -94,12 +99,13 @@ public class CityController {
         @RequestParam String updateName,
         @RequestParam String updateState,        
         City city,
-        BindingResult validation
+        BindingResult validation,
+        Model memory
             ) {    
        
-             cities.removeIf(updateCity -> updateCity.getName().equals(updateName) &&
-                                       updateCity.getState().equals(updateState));              
-            create(city,validation);
+             cities.removeIf(updateCity -> updateCity.getName().equalsIgnoreCase(updateName) &&
+                                       updateCity.getState().equalsIgnoreCase(updateState));              
+            create(city,validation, memory);
         return "redirect:/";
     }
 

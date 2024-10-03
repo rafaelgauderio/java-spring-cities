@@ -16,38 +16,42 @@
                     <p>A solution to CREATE, REVIEW, UPDATE and DELETE cities</p>
                 </div>
                 <#if updateCity??>
-                    <form action="/update" method="POST">
+                    <form action="/update" method="POST" class="needs-validation" novalidation>
                         <input type="hidden" name="updateName" value="${(updateCity.name)!}"/>
                         <input type="hidden" name="updateState" value="${(updateCity.state)!}"/>
                 <#else>
-                    <form action="/create" method="POST">
+                    <form action="/create" method="POST" class="needs-validation" novalidation>
                 </#if>                     
                         <div class="form-group">
                             <label for="name">City:</label>
                             <input
                                 required
-                                minlength=3  
-                                maxlength=50
-                                value="${(updateCity.name)!}"
+                                minlength=1  
+                                maxlength=60
+                                value="${(updateCity.name)!}${providedName!}"
                                 name="name" 
                                 type="text"
-                                class="form-control"
+                                class="form-control ${(name??)?then('is-invalid','')}"
                                 placeholder="Enter the city name"
                                 id="name">
+                            <div class="invalid-feedback">
+                                ${name!}
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="state">State:</label>
                             <input
-                                required
-                                minlength=2 
+                                required                                
                                 maxlength=2
-                                value="${(updateCity.state)!}"
+                                value="${(updateCity.state)!}${providedState!}"
                                 name="state"
                                 type="text"
-                                class="form-control"
+                                class="form-control ${(state??)?then('is-invalid','')}"
                                 placeholder="Enter the state name the the name belongs"
-                                id="state"
-                                >
+                                id="state">
+                            <div class="invalid-feedback">
+                                ${state!}
+                            </div>
                         </div>
                         <#if updateCity??>
                             <button type="submit" class="btn btn-primary">FINISH UPDATE CITY</button>
